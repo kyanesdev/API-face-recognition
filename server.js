@@ -39,8 +39,8 @@ app.post('/build-profile', (req, res) => {
     const buildProfile = spawn('/bin/bash', ['-c', 'cd AI-face-recognition && source ./venv/bin/activate && pip install -r requirements.txt && python3 build_profile.py']);
     buildProfile.on('close', (code) => {
         if (code !== 0)
-            return res.status(500).json({status: 'failure', message: 'Error occurred in Python script'});
-        res.status(200).json({status: 'success', message: 'Python script ran successfully'});
+            return res.status(500).json({status: 'Fallo', message: 'Ocurrio un error al crear el perfil'});
+        res.status(200).json({status: 'Éxito', message: 'Perfil creado exitosamente'});
     });
 });
 
@@ -48,8 +48,8 @@ app.post('/detect', (req, res) => {
     const detect = spawn('/bin/bash', ['-c', 'cd AI-face-recognition && source ./venv/bin/activate && pip install -r requirements.txt && python3 detect.py']);
     detect.on('close', (code) => {
         if (code !== 0)
-            return res.status(500).json({status: 'failure', message: 'Error occurred in Python script'});
-        res.status(200).json({status: 'success', message: 'Python script ran successfully'});
+            return res.status(500).json({status: 'Fallo', message: 'Ocurrio un error al intentar identificar'});
+        res.status(200).json({status: 'Éxito', message: 'Identificacion realizada exitosamente'});
     });
 });
 
@@ -57,8 +57,8 @@ app.post('/register-photo-profile', (req, res) => {
     const registerPhotoProfile = spawn('/bin/bash', ['-c', 'cd AI-face-recognition && source ./venv/bin/activate && pip install -r requirements.txt && python3 register_photo_profile.py']);
     registerPhotoProfile.on('close', (code) => {
         if (code !== 0)
-            return res.status(500).json({status: 'failure', message: 'Error occurred in Python script'});
-        res.status(200).json({status: 'success', message: 'Python script ran successfully'});
+            return res.status(500).json({status: 'Fallo', message: 'Ocurrio un error al tomar la foto'});
+        res.status(200).json({status: 'Éxito', message: 'Foto tomada exitosamente'});
     });
 });
 
