@@ -2,6 +2,7 @@ import cv2
 import face_recognition
 import numpy as np
 import time
+import sys
 
 # Step 1: Load the contents of the 'perfil.txt' file
 known_face_encodings = np.loadtxt("saved_user.txt")
@@ -19,6 +20,7 @@ cap = cv2.VideoCapture(0)
 delay = 5  # Delay in seconds
 start_time = time.monotonic()
 identifyProcess = 0
+status_code = 0
 
 while True:
     ret, frame = cap.read()
@@ -64,9 +66,13 @@ while True:
                 cv2.putText(frame, "Debe registrar su rostro", (left - 30, bottom + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 cv2.putText(frame, "para usar los servicios criticos", (left - 50, bottom + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 identifyProcess = 1
+                status_code = 401
                 
     cv2.imshow('Video', frame)
-
+    # Print the status_code value to stdout
+    print(f"status_code = {status_code}")
+    sys.stdout.flush()
+    
     if identifyProcess == 1:
         # Close the windows and end the process
         cv2.imshow('Video', frame)
