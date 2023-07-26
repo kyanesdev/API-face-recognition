@@ -21,6 +21,7 @@ delay = 5  # Delay in seconds
 start_time = time.monotonic()
 identifyProcess = 0
 status_code = 0
+identificado = 0
 
 while True:
     ret, frame = cap.read()
@@ -57,6 +58,7 @@ while True:
                 cv2.putText(frame, name, (left - 70, top - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
                 cv2.putText(frame, "Puede usar los servicios criticos", (left - 50, bottom + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
                 identifyProcess = 1
+                identificado = 1
 
             else:
                 # Draw rectangle and display the name
@@ -66,11 +68,13 @@ while True:
                 cv2.putText(frame, "Debe registrar su rostro", (left - 30, bottom + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 cv2.putText(frame, "para usar los servicios criticos", (left - 50, bottom + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 identifyProcess = 1
+                identificado = 0
                 status_code = 401
                 
     cv2.imshow('Video', frame)
     # Print the status_code value to stdout
     print(f"status_code = {status_code}")
+    print(f"identificado = {identificado}")
     sys.stdout.flush()
     
     if identifyProcess == 1:
